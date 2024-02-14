@@ -1,8 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const {themes} = require('prism-react-renderer');
+const lightCodeTheme = themes.github,
+  darkCodeTheme = themes.dracula;
 const math = require('remark-math');
 const katex = require('rehype-katex');
 
@@ -14,6 +15,7 @@ const config = {
   baseUrl: '/',
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
   favicon: 'img/Aragon-logo-circle.png',
 
   // GitHub pages deployment config.
@@ -62,6 +64,10 @@ const config = {
     },
   ],
 
+  themes: [
+    // ... Your other themes.
+    [require.resolve('@easyops-cn/docusaurus-search-local'), {}],
+  ],
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -71,30 +77,27 @@ const config = {
           src: 'img/logo-light.png',
         },
         items: [
-          // {
-          //   type: 'doc',
-          //   docId: 'sdk/README',
-          //   position: 'left',
-          //   label: 'SDK',
-          // },
-          // {
-          //   type: 'doc',
-          //   docId: '/docs/osx',
-          //   position: 'left',
-          //   label: 'Core',
-          // }
-          // {
-          //   type: 'doc',
-          //   docId: 'intro',
-          //   position: 'left',
-          //   label: 'Tutorial',
-          // },
-          //{to: '/blog', label: 'Blog', position: 'left'},
-          // {
-          //   href: 'https://github.com/facebook/docusaurus',
-          //   label: 'GitHub',
-          //   position: 'right',
-          // },
+          //   {
+          //     to: 'docs/osx',
+          //     type: 'docSidebar', // docSidebar
+          //     position: 'left',
+          //     sidebarId: 'osxSidebar', // foldername
+          //     label: 'osxSidebar', // navbar title
+          //   },
+          //   {
+          //     to: 'docs/sdk',
+          //     type: 'docSidebar', // docSidebar
+          //     position: 'left',
+          //     sidebarId: 'sdkSidebar', // foldername
+          //     label: 'sdkSidebar', // navbar title
+          //   },
+          //   {
+          //     to: 'subgraph',
+          //     type: 'docSidebar', // docSidebar
+          //     position: 'left',
+          //     sidebarId: 'schemaSidebar', // foldername
+          //     label: 'schemaSidebar', // navbar title
+          //   },
         ],
       },
       metadata: [
@@ -175,9 +178,18 @@ const config = {
 
   plugins: [
     [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
+      '@graphql-markdown/docusaurus',
       {
-        // Options here
+        schema:
+          'https://api.studio.thegraph.com/query/63158/defismarttournaments/version/latest',
+        rootPath: './docs',
+        baseURL: 'subgraph',
+        linkRoot: '/docs',
+        loaders: {
+          UrlLoader: {
+            module: '@graphql-tools/url-loader',
+          },
+        },
       },
     ],
     async function TailwindPlugin(context, options) {

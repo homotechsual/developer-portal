@@ -22,6 +22,13 @@ const componentCards: IComponentCardProps[] = [
     to: '/docs/sdk',
   },
   {
+    title: 'Aragon Subgraph',
+    description:
+      'Query and retrieve all information emitted in Aragon Smart Contract Events.',
+    img: <IllustrationSdk />,
+    to: '/docs/subgraph',
+  },
+  {
     title: 'Design System',
     description:
       "Aragon's ODS is a human-centered, open-source design system powering designers and developers alike through a unified, builder-friendly framework.",
