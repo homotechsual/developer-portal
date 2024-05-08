@@ -1,5 +1,5 @@
 ---
-title: The Smart Contracts behind DAOs
+title: Smart Contracts
 ---
 
 ## The Contracts Constituting Your DAO

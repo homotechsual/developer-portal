@@ -1,5 +1,5 @@
 ---
-title: Framework - How Everything Connects
+title: Framework
 ---
 
 ## The Infrastructure Running the Aragon OSx Protocol
